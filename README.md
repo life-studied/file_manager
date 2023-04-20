@@ -10,6 +10,7 @@
 
 * `getData`：读取文件，返回文件内容的string
 * `replaceAll`：将字符串中的特征子串替换为指定子串
+* `parseFileToWords`：将string分割成单词数组
 
 ## 使用示例
 

@@ -29,3 +29,29 @@ string& file_manager::replaceAll(string& context, const string& from, const stri
 	}
 	return context;
 }
+
+vector<string> file_manager::parseFileToWords(const string& fileTxt)
+{
+    size_t foundHere_a = 0, foundHere_b = 0;
+    string englishWord;
+    for (char i = 'a'; i <= 'z'; i++)
+        englishWord += i;
+    for (char i = 'A'; i <= 'Z'; i++)
+        englishWord += i;
+    foundHere_a = fileTxt.find_first_not_of(englishWord);
+    if (foundHere_a == string::npos)
+        return std::move(vector<string>());
+    vector<string> words;
+    while ((foundHere_b = fileTxt.find_first_not_of(englishWord, foundHere_a + 1)) != string::npos)
+    {
+        if (foundHere_b == foundHere_a + 1)
+        {
+            foundHere_a = foundHere_b;
+            continue;
+        }
+        words.push_back(fileTxt.substr(foundHere_a + 1, foundHere_b - foundHere_a - 1));
+        foundHere_a = foundHere_b;
+    }
+    words.push_back(fileTxt.substr(foundHere_a + 1, fileTxt.size() - foundHere_a - 1));
+    return words;
+}

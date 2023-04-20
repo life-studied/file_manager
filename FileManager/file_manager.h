@@ -1,7 +1,9 @@
 #pragma once
 #include <string>
+#include <vector>
 #include <fstream>
 using std::string;
+using std::vector;
 class file_manager
 {
 public:
@@ -11,5 +13,6 @@ public:
 		string& context,
 		const string& from,
 		const string& to);
+	vector<string> parseFileToWords(const string& fileTxt);
 };
 
