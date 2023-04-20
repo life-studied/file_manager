@@ -1,26 +1,37 @@
+#include <string>
 #include <iostream>
+#include <fstream>
+#include <vector>
 #include "file_manager.h"
-using std::cout;
-using std::endl;
+using namespace std;
+
+bool isBString(string testStr)
+{
+    int size = testStr.size();
+    for (size_t i = 0; i < size / 2; i++)
+    {
+        if (tolower(testStr[i]) == tolower(testStr[size - i] - 1))
+            continue;
+        return false;
+    }
+    return true;
+}
+
+
 int main(int argc, char const* argv[])
 {
     try
     {
-        file_manager myFile;
-        string data = myFile.getData("file_manager.cpp");
-        string from("std");
-        string to("hello");
-        cout << "The file start:" << endl;
-        cout << data << endl
-            << "the file end" << endl;
-        myFile.replaceAll(data, from, to);
-        cout << "The replace start:" << endl;
-        cout << data << endl
-            << "the replace end" << endl;
+        file_manager fm;
+        string fileTxt = fm.getData("main.cpp");
+        vector<string> words = fm.parseFileToWords(fileTxt);
+        for (const auto& i : words)
+            cout << i << " : " << isBString(i) << endl;
     }
     catch (const std::exception& e)
     {
         std::cerr << e.what() << '\n';
     }
+
     return 0;
 }
