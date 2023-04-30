@@ -7,7 +7,7 @@ using namespace std;
 
 bool isBString(string testStr)
 {
-    int size = testStr.size();
+    size_t size = testStr.size();
     for (size_t i = 0; i < size / 2; i++)
     {
         if (tolower(testStr[i]) == tolower(testStr[size - i] - 1))
@@ -27,6 +27,10 @@ int main(int argc, char const* argv[])
         vector<string> words = fm.parseFileToWords(fileTxt);
         for (const auto& i : words)
             cout << i << " : " << isBString(i) << endl;
+        string allwordsTxt;
+        for (const auto& i : words)
+            allwordsTxt += i+' ';
+        fm.writeData("hello.txt", allwordsTxt);
     }
     catch (const std::exception& e)
     {

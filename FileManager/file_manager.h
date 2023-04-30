@@ -8,7 +8,8 @@ class file_manager
 {
 public:
 	file_manager();
-	string getData(string filename) throw(std::ifstream::failure);
+	string getData(const string &filename) throw(std::ifstream::failure);
+	void writeData(const string& filename, const string& txt) throw(std::ofstream::failure);
 	string& replaceAll(
 		string& context,
 		const string& from,
